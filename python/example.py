@@ -104,42 +104,5 @@ def main():
         import traceback
         traceback.print_exc()
 
-
-def create_sample_data():
-    """Create some sample point cloud data for testing"""
-    print("Creating sample point cloud data...")
-    
-    # Create a simple cube as model
-    cube_points = []
-    for x in [0, 1]:
-        for y in [0, 1]:
-            for z in [0, 1]:
-                cube_points.append([x, y, z])
-    
-    # Add some noise
-    cube_points = np.array(cube_points, dtype=np.float32)
-    cube_points += np.random.normal(0, 0.01, cube_points.shape).astype(np.float32)
-    
-    # Create model point cloud
-    model_pc = PointCloud.from_numpy(cube_points)
-    model_pc.save("sample_cube.ply")
-    print("Sample cube saved to: sample_cube.ply")
-    
-    # Create scene with transformed cube
-    pose = np.array([
-        [1, 0, 0, 2],
-        [0, 1, 0, 1], 
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
-    ], dtype=np.float64)
-    
-    transformed_pc = transform_pointcloud(model_pc, pose)
-    transformed_pc.save("sample_scene.ply")
-    print("Sample scene saved to: sample_scene.ply")
-
-
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "--create-sample":
-        create_sample_data()
-    else:
         main()

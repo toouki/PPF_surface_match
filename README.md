@@ -12,6 +12,10 @@
 cd python
 ./install.sh
 ```
+```bash 
+cd python
+pip install -e .
+```
 
 #### 方法二：手动构建
 
